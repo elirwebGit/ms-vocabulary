@@ -10,7 +10,7 @@ async function bootstrap() {
     .setTitle('Vocabulary')
     .setDescription('Responsable to create new vocabulary ')
     .setVersion('1.0')
-    .addTag('vocabulary')
+    .addTag('vocabulary ')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
