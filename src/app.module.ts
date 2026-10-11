@@ -8,7 +8,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
 @Module({
   imports: [],
-  controllers: [AppController,VocabularyController],
+  controllers: [AppController, VocabularyController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
