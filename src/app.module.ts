@@ -6,9 +6,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
 @Module({
- imports:[
-  ConfigModule.forRoot({isGlobal:true}),
-  MongooseModule.forRoot('mongodb://localhost/nest'),
-  VocabularyModule]
+  imports: [],
+  controllers: [AppController,VocabularyController],
+  providers: [AppService],
 })
 export class AppModule { }
