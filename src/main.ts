@@ -1,19 +1,37 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule, ObserveInstrument } from './app.module.js';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-
+import { AppModule } from './app.module.js';
+import {ConfigService} from '@nestjs/config'
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    instrument: ObserveInstrument,
-  });
-  const config = new DocumentBuilder()
-    .setTitle('Vocabulary')
-    .setDescription('Responsable to create new vocabulary ')
-    .setVersion('1.0')
-    .addTag('vocabulary ')
-    .build();
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
-  await app.listen(process.env.PORT ?? 3000);
+  const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+
+  const rabbitMqUrl = configService.get('RABBITMQ_URL','');
+  const queeName = configService.get('RABBITMQ_QUEE','');
+const queeNameDLQ = configService.get('RABBITMQ_QUEEDLQ','');
+
+
+app.connectMicroservice<MicroserviceOptions>({
+  transport:Transport.RMQ,
+  options:{
+    urls:[rabbitMqUrl],
+    quee:[queeName],
+    noAck:false
+  }
+});
+
+
+app.connectMicroservice<MicroserviceOptions>({
+  transport:Transport.RMQ,
+  options:{
+    urls:[rabbitMqUrl],
+    quee:[queeNameDLQ],
+    noAck:false
+  }
+});
+
+  await app.startAllMicroservices();
+  console.log('VocabularyService pronto e escutando as filas');
+
 }
 await bootstrap();
