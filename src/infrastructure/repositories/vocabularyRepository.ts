@@ -13,8 +13,7 @@ export class VocabularyRepository implements IVocabularyRepository {
         return count > 0;
     }
     async save(vocabulary: VocabularyDocument): Promise<any> {
-        const newVocabulary = new this.model({ ...vocabulary });
-        return await newVocabulary.save();
+        return await new this.model({ ...vocabulary }).save();
 
     }
     async searchVocabulary(word: string): Promise<any> {
