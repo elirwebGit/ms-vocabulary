@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import type { IVocabularyRepository } from '../../domain/repositories/IVocabularyRepository.js';
-import { VocabularyDocument } from '../../domain/entities/vocabularies.js';
+import { VocabularyDocument } from '../../domain/entities/vocabularyDocument.js';
 import { GeminiProvider } from '../../infrastructure/ai/geminiProvider.js';
 import { newVocabulary } from '../prompts/newVocabulary.js';
 import { VocabularyMapper } from '../facade/vocabularyMapper.js';

@@ -5,7 +5,7 @@ import { Ctx, EventPattern, MessagePattern, Payload, RmqContext } from '@nestjs/
 @Controller()
 export class VocabularyController {
   constructor(private readonly vocabularyUseCase: VocabularyUseCase) {}
-  @EventPattern('nome da fila')
+  @EventPattern(process.env.RABBITMQ_QUEUE)
   async handle(@Payload() data: any, @Ctx() context: any) {
     const rmqContext = context as RmqContext;
     const start = Date.now();
@@ -26,7 +26,7 @@ export class VocabularyController {
     }
   }
 
-  @EventPattern('nome da fila morta')
+  @EventPattern(process.env.RABBITMQ_QUEEDLQ)
   async handleDLQ(@Payload() data: any, @Ctx() context: any) {
     const rmqContext = context as RmqContext;
     const start = Date.now();
@@ -47,7 +47,7 @@ export class VocabularyController {
     }
   }
 
-  @MessagePattern('nome da fila busca')
+  @MessagePattern(process.env.RABBITMQ_QUEUESEARCH)
   async handleSearch(@Payload() data: any, @Ctx() context: any) {
     const rmqContext = context as RmqContext;
     const start = Date.now();

@@ -1,4 +1,4 @@
-import { VocabularyDocument } from "../entities/vocabularies.js";
+import { VocabularyDocument } from "../entities/vocabularyDocument.js";
 
 export interface IVocabularyRepository{
     save(vocabulary:VocabularyDocument):Promise<boolean>;

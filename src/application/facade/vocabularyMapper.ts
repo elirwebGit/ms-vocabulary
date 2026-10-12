@@ -1,5 +1,5 @@
 import { ContextItem } from '../../domain/entities/contextItem.js';
-import { VocabularyDocument } from '../../domain/entities/vocabularies.js';
+import { VocabularyDocument } from '../../domain/entities/vocabularyDocument.js';
 
 export class VocabularyMapper {
   static toDomain(data: any,aiResult?:any): VocabularyDocument {

@@ -1,5 +1,5 @@
 import { InjectModel } from "@nestjs/mongoose";
-import { VocabularyDocument } from "../../domain/entities/vocabularies.js";
+import { VocabularyDocument } from "../../domain/entities/vocabularyDocument.js";
 import { IVocabularyRepository } from "../../domain/repositories/IVocabularyRepository.js";
 import { Injectable } from "@nestjs/common";
 import { model, Model } from "mongoose";
