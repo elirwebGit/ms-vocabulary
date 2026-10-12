@@ -13,7 +13,6 @@ export class HealthController{
     @HealthCheck()
     check(){
         const rabbitMqUrl = this.configService.get<string>('RABBITMQ_URL','');
-
         return this.helth.check([
             ()=> this.microservice.pingCheck(
             'rabbitmq', {
