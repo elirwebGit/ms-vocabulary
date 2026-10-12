@@ -6,6 +6,7 @@ import { vocabularySchema } from "./infrastructure/schema/vocabularySchema.js";
 import { MongooseModule } from "@nestjs/mongoose";
 import { VocabularyUseCase } from "./application/useCases/vocabularyUseCase.js";
 import { VocabularyRepository } from "./infrastructure/repositories/vocabularyRepository.js";
+import { GeminiProvider } from "./infrastructure/ai/geminiProvider.js";
 
 
 @Module({
@@ -23,7 +24,8 @@ import { VocabularyRepository } from "./infrastructure/repositories/vocabularyRe
         {
             provide: 'IVocabularyRepository',
             useClass: VocabularyRepository
-        }
+        },
+        GeminiProvider
     ]
 })
 export class VocabularyModule {
